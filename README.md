@@ -3,10 +3,12 @@ Simple script to collect RSI and full /var/log directory from a Juniper router u
 
 ### Modules
 Juniper PyEZ module (created by Juniper)
+Paramiko module
 
-Can be installed on linux using pip:
+Both can be installed on linux using pip:
 ```
-  pip install junos-eznc
+  $ pip install junos-eznc
+  $ pip install paramiko
 ```
 ### Python 2/3 Compatibility
 Print function behaves like Python3 in Python2 with the following:
