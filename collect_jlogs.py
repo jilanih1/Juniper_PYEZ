@@ -4,12 +4,7 @@ from __future__ import print_function
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 from jnpr.junos.utils.start_shell import StartShell
-import json
-import getpass
-import sys
-import subprocess
-import paramiko
-import datetime
+import json, getpass, sys, subprocess, paramiko, datetime
 #########################################################################################
 if __name__ == '__main__':
 
