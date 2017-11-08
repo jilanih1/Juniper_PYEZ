@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+#MODULES#################################################################################
 from __future__ import print_function
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
@@ -10,12 +10,12 @@ import sys
 import subprocess
 import paramiko
 import datetime
-
+#########################################################################################
 if __name__ == '__main__':
 
 	if sys.version_info[:2] <= (2, 7):
 		input = raw_input
-
+#VARIABLES###############################################################################
 	date = str(datetime.datetime.today().strftime('%Y_%m_%d'))
 	proc = subprocess.Popen('pwd', stdout=subprocess.PIPE)
 	pwd = proc.stdout.read()
@@ -27,15 +27,14 @@ if __name__ == '__main__':
 	file2 = vartmp + date + '_PYEZ_varlog.tar.gz'
 	ssh = paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
 	#hostname = input('Device hostname: ')
 	#username = input('Device username: ')
 	password = getpass.getpass('Device password: ')
 	hostname = '192.168.1.48'
 	username = 'admin'
-
 	dev = Device(host=hostname, user=username, passwd=password)
-
+#########################################################################################
+#GENERATING LOGS ON JUNOS################################################################
 	try:
 		dev.open()
 	except ConnectError as err:
@@ -56,13 +55,14 @@ if __name__ == '__main__':
 		print(line)
 	jshell.close()
 	dev.close()
-
+#########################################################################################
+#PULLING LOGS FROM DEVICE################################################################
 	ssh.connect(hostname='192.168.1.48',username='admin',password=password)
 	sftp = ssh.open_sftp()
 	sftp.get('' + file1 + '','' + save1 + '')
 	sftp.get('' + file2 + '','' + save2 + '')
 	sftp.close()
 	ssh.close()
-
+#########################################################################################
 sys.exit(1)
-
+#########################################################################################
