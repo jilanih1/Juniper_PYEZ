@@ -1,14 +1,14 @@
-# Juniper_PYEZ
+# collect_jlogs.py
 Simple script to collect RSI and full /var/log directory from a Juniper router using Juniper's PyEZ module for Python.
 
-#### Modules
+### Modules
 Juniper PyEZ module (created by Juniper)
 
 Can be installed on linux using pip:
 ```
   pip install junos-eznc
 ```
-#### Python 2/3 Compatibility
+### Python 2/3 Compatibility
 Print function behaves like Python3 in Python2 with the following:
 ```
   from __future__ import print_function
@@ -21,7 +21,7 @@ The following code checks the version of Python and if it's Python 2.7 or lower 
 	  input = raw_input
 ```
 **Note:** *Need to import sys module.*
-#### Juniper device configurations.
+### Juniper device configurations.
 The script connects to the Juniper device via a NETCONF session over SSH (Port 830).
 
 The following configurations are necessary:
