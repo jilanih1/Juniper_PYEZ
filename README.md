@@ -1,1 +1,2 @@
-# Juniper_PYEZ
+# Juniper_PYEZS
+Simply script to collect RSI and full /var/log directory from a Juniper router using Juniper's PyEZ module for Python.
