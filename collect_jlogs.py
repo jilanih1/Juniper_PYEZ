@@ -1,17 +1,32 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-import getpass
-import sys
-import json
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 from jnpr.junos.utils.start_shell import StartShell
+import json
+import getpass
+import sys
+import subprocess
+import paramiko
+import datetime
 
 if __name__ == '__main__':
 
 	if sys.version_info[:2] <= (2, 7):
 		input = raw_input
+
+	date = str(datetime.datetime.today().strftime('%Y_%m_%d'))
+	proc = subprocess.Popen('pwd', stdout=subprocess.PIPE)
+	pwd = proc.stdout.read()
+	pwd = pwd.strip('\n') + '/'
+	save1 = pwd + date + '_PYEZ_RSI.txt'
+	save2 = pwd + date + '_PYEZ_varlog.tar.gz'
+	vartmp = '/var/tmp/'
+	file1 = vartmp + date + '_PYEZ_RSI.txt'
+	file2 = vartmp + date + '_PYEZ_varlog.tar.gz'
+	ssh = paramiko.SSHClient()
+	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 	#hostname = input('Device hostname: ')
 	#username = input('Device username: ')
@@ -32,8 +47,8 @@ if __name__ == '__main__':
 
 	jshell = StartShell(dev)
 	jshell.open()
-	jshell.run('cli -c "request support information | save /var/tmp/PYEZ_RSI.txt"')
-	jshell.run('tar -zcvf /var/tmp/PYEZ_varlog.tar.gz /var/log/*')
+	jshell.run('cli -c "request support information | save ' + file1 + '"')
+	jshell.run('tar -zcvf ' + file2 + ' /var/log/*')
 	#flist = json.dumps(jshell.run('cli -c "file list /var/tmp | grep PYEZ"'))
 
 	flist = jshell.run('cli -c "file list /var/tmp | grep PYEZ" ')
@@ -41,6 +56,13 @@ if __name__ == '__main__':
 		print(line)
 	jshell.close()
 	dev.close()
-	
+
+	ssh.connect(hostname='192.168.1.48',username='admin',password=password)
+	sftp = ssh.open_sftp()
+	sftp.get('' + file1 + '','' + save1 + '')
+	sftp.get('' + file2 + '','' + save2 + '')
+	sftp.close()
+	ssh.close()
+
 sys.exit(1)
 
