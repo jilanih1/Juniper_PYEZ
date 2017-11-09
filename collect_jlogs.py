@@ -4,7 +4,7 @@ from __future__ import print_function
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 from jnpr.junos.utils.start_shell import StartShell
-import json, getpass, sys, subprocess, paramiko, datetime
+import getpass, sys, subprocess, paramiko, datetime, re
 #########################################################################################
 if __name__ == '__main__':
 
@@ -43,11 +43,6 @@ if __name__ == '__main__':
 	jshell.open()
 	jshell.run('cli -c "request support information | save ' + file1 + '"')
 	jshell.run('tar -zcvf ' + file2 + ' /var/log/*')
-	#flist = json.dumps(jshell.run('cli -c "file list /var/tmp | grep PYEZ"'))
-
-	flist = jshell.run('cli -c "file list /var/tmp | grep PYEZ" ')
-	for line in flist:
-		print(line)
 	jshell.close()
 	dev.close()
 #########################################################################################
