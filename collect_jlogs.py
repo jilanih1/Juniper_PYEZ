@@ -38,7 +38,6 @@ if __name__ == '__main__':
 	ssh = paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 	dev = Device(host=hostname, user=username, passwd=password)
-#########################################################################################
 #GENERATING LOGS ON JUNOS################################################################
 	try:
 		dev.open()
@@ -55,7 +54,6 @@ if __name__ == '__main__':
 	jshell.run('tar -zcvf ' + file2 + ' /var/log/*')
 	jshell.close()
 	dev.close()
-#########################################################################################
 #PULLING LOGS FROM DEVICE################################################################
 	ssh.connect(hostname='192.168.1.48',username='admin',password=password)
 	sftp = ssh.open_sftp()
@@ -65,4 +63,3 @@ if __name__ == '__main__':
 	ssh.close()
 #########################################################################################
 sys.exit(1)
-#########################################################################################
