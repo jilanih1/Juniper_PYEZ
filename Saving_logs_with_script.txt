@@ -1,0 +1,11 @@
+
+Following is how the logs will be saved with script:
+
+$ ./collect_jlogs.py -d 192.168.1.48 -l admin
+Device password: 
+
+We can verify the logs are saved:
+
+$ ls -l *PYEZ*
+-rw-r--r-- 1 hammad hammad  83498 Nov  9 21:35 2017_11_09_PYEZ_RSI.txt
+-rw-r--r-- 1 hammad hammad 134670 Nov  9 21:35 2017_11_09_PYEZ_varlog.tar.gz
