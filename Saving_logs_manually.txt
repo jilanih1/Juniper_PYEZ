@@ -1,0 +1,61 @@
+Following is how the logs will be saved manually (without script):
+
+$ ssh admin@192.168.1.48
+admin@192.168.1.48's password: 
+--- JUNOS 12.1R1.9 built 2012-03-24 12:52:33 UTC
+admin@Juniper_Lab_Router> request support information | save /var/tmp/Manual_RSI.txt 
+Wrote 1836 lines of output to '/var/tmp/Manual_RSI.txt'
+
+admin@Juniper_Lab_Router> start shell 
+% tar -zcvf /var/tmp/Manual_varlog.tar.gz /var/log/*
+tar: Removing leading `/' from member names
+var/log/aprobed
+var/log/apsd
+var/log/authd_libstats
+var/log/authd_profilelib
+var/log/authd_sdb.log
+var/log/chassisd
+var/log/cosd
+var/log/dcd
+var/log/dfwc
+var/log/eccd
+var/log/ext/
+var/log/flowc/
+var/log/flowc/failed/
+var/log/ggsn/
+var/log/ggsn/gtppcdr/
+var/log/gres-tp
+var/log/hostname-cached
+var/log/ifstraced
+var/log/interactive-commands
+var/log/inventory
+var/log/lmpd
+var/log/mastership
+var/log/messages
+var/log/pf
+var/log/pfed
+var/log/pgmd
+var/log/pppoed_era_jpppoed_era_in_progress.log
+var/log/pppoed_era_jpppoed_era_in_progress.log.0
+var/log/pppoed_era_jpppoed_era_in_progress.log.1
+var/log/pppoed_era_jpppoed_era_in_progress.log.2
+var/log/pppoed_era_jpppoed_era_in_progress.log.3
+var/log/rtspd
+var/log/smartd.trace
+var/log/utmp
+var/log/wtmp
+var/log/wtmp.0.gz
+var/log/wtmp.1.gz
+var/log/wtmp.2.gz
+% exit
+exit
+
+admin@Juniper_Lab_Router> exit 
+
+Connection to 192.168.1.48 closed.
+$ scp admin@192.168.1.48://var/tmp/Manual_RSI.txt .
+admin@192.168.1.48's password: 
+Manual_RSI.txt                                                                      100%   81KB  81.1KB/s   00:00    
+$ scp admin@192.168.1.48://var/tmp/Manual_varlog.tar.gz .
+admin@192.168.1.48's password: 
+Manual_varlog.tar.gz                                                                100%  130KB 130.2KB/s   00:00
