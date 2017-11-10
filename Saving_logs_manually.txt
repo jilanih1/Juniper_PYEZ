@@ -59,3 +59,9 @@ Manual_RSI.txt                                                                  
 $ scp admin@192.168.1.48://var/tmp/Manual_varlog.tar.gz .
 admin@192.168.1.48's password: 
 Manual_varlog.tar.gz                                                                100%  130KB 130.2KB/s   00:00
+
+We can verify the logs are saved:
+
+$ ls -l Manual*
+-rw-r--r-- 1 hammad hammad  83006 Nov  9 21:28 Manual_RSI.txt
+-rw-r--r-- 1 hammad hammad 133344 Nov  9 21:29 Manual_varlog.tar.gz
