@@ -2,7 +2,7 @@
 Simple script to collect RSI and full /var/log directory from a device running JunOS using Juniper's PyEZ module for Python.
 
 ### Modules
-- Juniper PyEZ module (created by Juniper)
+- PyEZ module (created by Juniper)
 - Paramiko module
 
 Both can be installed on Linux using pip:
