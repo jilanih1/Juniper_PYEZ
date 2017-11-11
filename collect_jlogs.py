@@ -55,7 +55,7 @@ if __name__ == '__main__':
 	jshell.close()
 	dev.close()
 #PULLING LOGS FROM DEVICE################################################################
-	ssh.connect(hostname='192.168.1.48',username='admin',password=password)
+	ssh.connect(hostname=hostname,username=username,password=password)
 	sftp = ssh.open_sftp()
 	sftp.get('' + file1 + '','' + save1 + '')
 	sftp.get('' + file2 + '','' + save2 + '')
