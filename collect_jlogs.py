@@ -5,14 +5,14 @@ from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 from jnpr.junos.utils.start_shell import StartShell
 import getpass, sys, subprocess, paramiko, datetime, argparse
-#########################################################################################
+#PARSER##################################################################################
 parser = argparse.ArgumentParser(usage='collect_jlogs.py -d <hostname> -l <username>')
 parser.add_argument('-d', '--device', help='type a Juniper device.')
 parser.add_argument('-l', '--username', help='type username.')
 args = parser.parse_args()
-
+#########################################################################################
 if __name__ == '__main__':
-
+#LOGIN VARIABLES#########################################################################
 	if sys.version_info[:2] <= (2, 7):
 		input = raw_input
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 	else:
 		username = args.username
 	password = getpass.getpass('Device password: ')
-#VARIABLES###############################################################################
+#OTHER VARIABLES#########################################################################
 	date = str(datetime.datetime.today().strftime('%Y_%m_%d'))
 	proc = subprocess.Popen('pwd', stdout=subprocess.PIPE)
 	pwd = proc.stdout.read()
@@ -38,7 +38,7 @@ if __name__ == '__main__':
 	ssh = paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 	dev = Device(host=hostname, user=username, passwd=password)
-#GENERATING LOGS ON JUNOS################################################################
+#GENERATING LOGS IN JUNOS################################################################
 	try:
 		dev.open()
 	except ConnectError as err:
